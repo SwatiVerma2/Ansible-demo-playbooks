@@ -1,0 +1,19 @@
+# Loops in Ansible
+---
+- name: installing and starting a package
+  hosts: all
+  vars:
+    - apps: [yum,httpd,vim,telnet] #list
+
+  tasks:
+  - name: installing nginx
+    yum: 
+      name: "{{ items }}"
+      state: present
+    with_items: "{{ apps }}"
+
+  - name: starting the nginx service
+    service: 
+      name: "{{ app }}"
+      state: started
+      enabled: true

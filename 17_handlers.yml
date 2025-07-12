@@ -1,0 +1,22 @@
+# Handlers 
+# In Ansible, handlers are special tasks that run only when notified by other tasks. 
+# This is useful for operations that should only occur when a change is made, such as restarting a service after its configuration file has been updated
+---
+- name: Enable Firewall Service or Port
+  hosts: all
+
+  tasks:
+  - name: Enable a service in firewall
+    firewalld:  
+      port: 80/tcp 
+      permanent: true
+      state: enabled
+    notify: 
+      - Reload Firewalld
+
+
+  handlers: # handlers are executed at the end
+  - name: Reload Firewalld
+    service:
+      name: firewalld
+      state: reloaded

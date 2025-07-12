@@ -1,0 +1,15 @@
+#Copy Files on Remote Server
+---
+- name: Copying files to Remote
+  hosts: all
+
+  tasks:
+  - name: copy files
+    copy:  # copy module
+      src: /root/myfile.txt
+      dest: /tmp/
+      owner: swati #assigning file to particular user
+      group: swati
+      # mode: 0777
+      mode: ugo=rw
+      backup: true # taking backup of files whenever a change is made

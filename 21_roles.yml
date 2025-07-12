@@ -1,0 +1,63 @@
+# Ansible Roles: It is a structured way of grouping together various functionalities and making it easier to reuse and share common setup tasks.
+#  Use Case:
+# · Install apache httpd webserver on remote  --> Its a task
+# server
+# . Place our custom HTML File to use
+# · Start the service
+# · Enable service in firewall
+# . Reload the Firewall
+
+#  cmd to create ansible roles: ansible-galaxy init role_name
+# It will create a structure in the directory named role_name
+#  roles structure: defaults, files, handlers, meta, README.md, tasks , templates, tests, vars
+# cd tasks/main.yml
+---
+- name: Install httpd
+  yum: 
+    name: "{{ httpd_package_name }}"
+    state: present
+  become: true
+
+- name: Place our custom HTML File to use
+  copy:
+    src: index.html # no need to give location when you have places the file in "files" directory which is created when ansible-galaxy command was executed
+    dest: /var/www/html/index.html
+  become: true
+
+- name: Start the service
+  service:
+    name: "{{ httpd_package_name }}"
+    state: started
+    enabled: yes
+  become: true
+
+#  create vars in vars directory
+# vars/main.yml
+# httpd_package_name: httpd
+# html_file_path: /var/www/html/index.html
+
+#  Creating new role for firewall
+# cmd: ansible-galaxy init <fwd_service>
+
+# tasks/main.yml
+- name: Enable service in firewall
+  firewalld:
+    service: "{{ service_name }}"
+    state: enabled
+    permanent: true
+  become: true
+  when: ansible_os_family == "RedHat"
+  notify: Reload Firewall
+
+# vars/main.yml
+# service_name = http
+
+# handlers/main.yml
+- name: Reload Firewall
+  service:
+    name: firewalld
+    state: reloaded
+  become: true
+
+
+  

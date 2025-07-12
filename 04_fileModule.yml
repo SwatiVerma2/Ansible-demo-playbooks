@@ -1,0 +1,20 @@
+# Ansible File Module
+---
+- name: File Module
+  hosts: all
+
+  tasks:
+  - name: Creating a file
+    file: #module
+      path: /tmp/newfile.txt
+      # state: touch
+      state: absent #deleting a file
+      owner: paul
+      group: paul
+      mode: u=rwx,g=rw,o=reboot
+
+  - name: Creating a directory
+    file: 
+      path: /tmp/myfolder
+      # state: directory
+      state: absent # deleting a directory

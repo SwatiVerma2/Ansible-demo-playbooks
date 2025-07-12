@@ -1,0 +1,33 @@
+# Run Playbook with SUDO User
+#  not a root user then you won't be able to run the playbook 
+# for normal operation
+#  cmd: ssh-keygen > "ssh-copy-id username@remote-server-ip" that is "ssh-copy-id swati@10.211.55.6"
+# Now you will be able to run the ansible playbook
+
+#  firewall service operations is not allowed to normal user
+# ERROR: NotAuthorizedException
+#  you can add "become: true" in your playbook
+
+---
+- name: Enable Firewall Service or Port
+  hosts: all
+  become: true # runs the playbook as a root user
+
+  #  when you'll execute It will show "failed - missing sudo password"
+  #  Providing password:
+  #  ansible-playbook --ask-become-pass pb14_Enable_Firewall
+  # will ask for password
+
+  tasks:
+  - name: Enable a service in firewall
+    firewalld:   #firewalld module
+      # service: nginx # ERROR: not among the existing services
+      port: 80/tcp # need to enable it through port
+      permanent: true
+      state: enabled
+
+# any changes made to thr firewall needs to be reloaded so that they come in effect
+  - name: reload the firewalld
+    service:
+      name: firewalld
+      state: reloaded

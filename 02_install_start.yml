@@ -1,0 +1,21 @@
+# For installing and starting a package
+---
+- name: installing and starting a package
+  hosts: localhost
+  become: true  #tasks should be run with sudo privileges 
+
+  tasks:
+  - name: installing nginx
+    yum: #module 
+      name: nginx # name of the package
+      state: present
+  - name: starting the nginx service
+    service: 
+      name: nginx
+      state: started
+      enabled: true # to make sure that the service is up and running even after the reboot
+
+
+# Command
+# ansible-inventory --list
+# ansible all -m ping # all - applied to all the files in the hosts file

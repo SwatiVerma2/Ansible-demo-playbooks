@@ -1,0 +1,20 @@
+# Creating users on remote
+---
+- name: User MGMT
+  hosts: all
+
+  tasks:
+  - name: User Creation
+    user:       #User module
+      name: nick
+      comment: new user for devops team
+      # home: /home/nick to specify a particular directory, /home/nick --> this is default
+      shell: /bin/bash  
+      # group: QA # adding user to a specific group but first create that group - groupadd mygroup
+      # adding group to multiple groups
+      groups: QA,nick,dev
+      state: absent # to delete a user
+      remove: yes # to delete the data associated with  the user
+
+#  cmd - cat /etc/passwd, id nick
+#  ls -l /home - it will include directory of the users. 

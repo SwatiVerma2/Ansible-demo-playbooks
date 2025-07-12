@@ -1,0 +1,17 @@
+# loops
+# use case: want to create multiple users
+---
+- name: User MGMT
+  hosts: all
+
+  tasks:
+  - name: User Creation
+    user:     
+      name: "{{ item }}" # variable
+      comment: new user for devops team
+      shell: /bin/bash  
+    loop:
+      - Rahul
+      - Shikhar
+      - Dhoni
+      - Virat

@@ -1,0 +1,13 @@
+# Download files from Internet
+---
+- name: Download files
+  hosts: all
+
+  tasks:
+  - name: Download files
+    get_url:  #  get_url module
+      url: #url
+      dest: /tmp/script/
+      owner: swati
+      group: dev
+      mode: 0777

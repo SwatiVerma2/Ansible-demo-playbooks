@@ -1,0 +1,13 @@
+# RUN A SCRIPT ON A REMOTE SERVER
+---
+- name: Run a SCRIPT
+  hosts: all
+
+  tasks:
+  - name: Run SCRIPT
+    shell: ./test.sh >> tests.log # shell module
+    # redirect to test.log, this is done cuz we were unable to see the echo "Hey buddy" on th eterminal
+    args: # for location
+      chdir: /tmp/script
+      creates: test.log
+

@@ -1,0 +1,20 @@
+
+# Enable Firewall Service or Port
+---
+- name: Enable Firewall Service or Port
+  hosts: all
+
+  tasks:
+  - name: Enable a service in firewall
+    firewalld:   #firewalld module
+      # service: nginx # ERROR: not among the existing services
+      port: 80/tcp # need to enable it through port
+      permanent: true
+      state: enabled
+
+# any changes made to thr firewall needs to be reloaded so that they come in effect
+
+  - name: reload the firewalld
+    service:
+      name: firewalld
+      state: reloaded

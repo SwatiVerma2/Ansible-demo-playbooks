@@ -1,0 +1,37 @@
+Ansible Galaxy
+- Ansible Galaxy is a community-driven platform designed for sharing, discovering, and managing reusable Ansible roles and collections. 
+- It simplifies automation by providing pre-built components that can be integrated into your Ansible projects. 
+
+RedHat Ansible Tower
+· A web-based UI
+· Centralized Management
+. Job Scheduling
+. Reporting and Analytics
+. Integrate with ticketing system tool
+
+
+Advantages of using Ansible
+
+· Simple and easy to use: Ansible uses a simple and easy-to-learn language
+(YAML) to define playbooks, which makes it easy for anyone to use, even
+those with little or no programming experience.
+
+· Agentless architecture: Ansible does not require any agents to be installed
+on remote systems, which makes it easy to set up and use.
+
+· Configuration management: Ansible can be used to automate configuration
+management tasks such as provisioning, application deployment, and
+infrastructure management.
+
+· Scalability: Ansible can manage a large number of systems simultaneously,
+making it ideal for large-scale deployments.
+
+· Ansible playbooks can be run multiple times without changing the system state.
+
+. Open-source: Ansible is an open-source tool, which means it is free to use and
+has a large community of contributors who regularly contribute to its
+development.
+
+· Integration with other tools: Ansible can be integrated with other tools such as
+Docker, Kubernetes, and AWS, which makes it versatile and easy to use in a
+variety of environments.

@@ -1,0 +1,34 @@
+Tags in Ansible
+- We have a playbook with multiple tasks and on running this playbook all the tasks will run but if we want to perform only few tasks then creating a new playbook for it is not a good approach so for that we use tags.
+- We can associate tags with each task.
+
+
+---
+- name: installing and starting a package
+  hosts: localhost
+  become: true  #tasks should be run with sudo privileges 
+
+  tasks:
+
+  - name: installing nginx
+    yum: #module 
+      name: nginx # name of the package
+      state: present
+    tags: i-nginx
+
+  - name: starting the nginx service
+    service: 
+      name: nginx
+      state: started
+      enabled: true 
+    tags: ss-nginx
+
+1) Command to list the tags in a playbook
+ansible-playbook <playbook-name> --list-tags
+
+2) Command to run a specific task
+ansible-playbook <playbook-name> -t i-nginx
+
+3) Command to stop a specific task from running
+ansible-playbook <playbook-name> --skip-tags ss-nginx
+

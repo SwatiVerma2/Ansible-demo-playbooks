@@ -1,0 +1,19 @@
+# Adding CRON JOB on remote
+--- 
+- name: Cron Setup
+  hosts: all
+
+  tasks:
+  - name: Add cron JOB
+    cron:    #module
+      name: Run Test script
+      minute: 30
+      hour: 18
+      day: 15
+      month: "*"
+      weekday: "*"
+      user: paul
+      job: /tmp/script/test.sh
+      disable: yes #temporary disable
+       
+# command : to list the cron jobs "crontab -l"

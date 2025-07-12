@@ -1,0 +1,18 @@
+# Environment Variable
+---
+- name: Modify Cron
+  hosts: all
+
+
+  tasks:
+  - name: remove cron job
+    cron: 
+    # using envt variables
+      name: VAR
+      env: yes
+      user: paul
+      job: /tmp/script/test.sh
+      insertbefore: PATH
+      # insertafter: PATH
+      # deleting envt variable, you can list vars using the cmd - "crontab -i"
+      state: absent 

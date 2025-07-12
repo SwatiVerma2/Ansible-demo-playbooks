@@ -1,0 +1,18 @@
+# Find and Stop Process
+# pgrep nginix - list the pids
+# pgrep nginix | xargs kill -- to kill the process
+
+---
+- name: Kill a process
+  hosts: all
+
+  tasks:
+  - name: Find a process and kill it
+    ignore_errors: yes
+    shell: "pgrep nginx | xarsgs kill"  # shell module
+
+# starting it 
+  - name: Start the service
+    service: # service module
+      name: nginx
+      state: started

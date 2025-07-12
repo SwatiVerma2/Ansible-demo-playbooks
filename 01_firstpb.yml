@@ -1,0 +1,15 @@
+---
+- name: First basic Playbook
+  # hosts: localhost
+  hosts: webserver # name of the group inside the host file
+
+
+  tasks:
+  - name: Test Connectivity
+    ping: 
+  - name: "Print Output"
+    debug: msg="Alright!!" #debug modules to print
+
+# command to run a playbook:
+#  ansible-playbook first_pb.yml
+#  ansible-playbook --syntax-check first_pb.yml

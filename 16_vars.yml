@@ -1,0 +1,24 @@
+# Variables in Ansible
+---
+- name: installing and starting a package
+  hosts: all
+  become: true 
+  vars:
+    - app: nginx
+
+  tasks:
+  - name: installing nginx
+    yum: 
+      name: "{{ app }}"
+      state: present
+
+  - name: starting the nginx service
+    service: 
+      name: "{{ app }}"
+      state: started
+      enabled: true
+
+
+#  Creating variable in inventory file or hosts file
+# serverA ansible_hosts=10.211.44.5
+# cmd - ansible serverA -m ping

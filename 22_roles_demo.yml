@@ -1,0 +1,8 @@
+---
+- name: Install https and firewall changes
+  hosts: all
+  roles:
+    - httpd_setup
+    - fwd_service
+
+# cmd - ansible-playbook roles_demo.yml

@@ -1,0 +1,34 @@
+# Ansible Ad Hoc Tasks
+
+Syntax: 
+ansible <host-pattern> -m <module> -a "<module- arguments>" -u <username> -b
+- <host-pattern> can be group name, all, localhost, IP address whatever you provide in host file 
+-m --> module , -a --> argument
+
+Example 1: ansible myserver -m command -a "df-h"
+
+Example 2: ansible localhost -m ping 
+
+Example 3: ansible all -m ping 
+it will ping all the Ips present in the host file
+
+Example 4: ansible 10.211.55.3 -m ping 
+
+Example 5: Coping a file
+ansible 10.211.55.3 -m copy -a " src=/home/paul/paulfile dest=/tmp/script/" -b --ask-become-pass
+provide the password > file copied
+
+Example 6: We can also change the permission while copying
+ansible 10.211.55.3 -m copy -a " src=/home/paul/paulfile dest=/tmp/script/ mode=0777" -b --ask-become-pass 
+
+Example 7: Restarting a service
+ansible all -m service -a "name=nginx state=reloaded"
+
+Example 8: Triggering a script on remote server
+ansible all -m shell -a "/tmp/script/test.sh"
+
+Example 9: Monitoring: to check how much memory is free or utilised on remote server
+ansible all -m command -a "free -h"
+
+Example 10: Installing a software
+ansible all -m yum -a "name=vim state=present"
